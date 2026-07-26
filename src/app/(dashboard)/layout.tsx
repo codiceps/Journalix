@@ -15,7 +15,7 @@ export default async function DashboardLayout({
     <div className="relative min-h-screen bg-ink">
       <Sidebar user={session?.user} />
       <TopNavbar />
-      <main className="lg:ml-60 pt-16 pb-20 lg:pb-0 min-h-screen p-4 lg:p-6 flex flex-col gap-4">
+      <main className="lg:ml-60 px-4 pt-24 pb-20 lg:px-6 lg:pt-24 lg:pb-6 min-h-screen flex flex-col gap-4">
         {children}
       </main>
     </div>
