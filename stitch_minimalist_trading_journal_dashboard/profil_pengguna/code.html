@@ -1,0 +1,391 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>User Profile - Journalix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#410004",
+                      "secondary": "#ffb3ad",
+                      "on-primary-fixed": "#002109",
+                      "background": "#0b1326",
+                      "primary-fixed-dim": "#4ae176",
+                      "tertiary": "#afc7ff",
+                      "primary-fixed": "#6bff8f",
+                      "on-secondary-container": "#ffaea8",
+                      "surface-tint": "#4ae176",
+                      "surface-container-highest": "#2d3449",
+                      "outline": "#869585",
+                      "on-secondary": "#68000a",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#002e6a",
+                      "on-secondary-fixed-variant": "#930013",
+                      "on-primary-fixed-variant": "#005321",
+                      "surface": "#0b1326",
+                      "on-tertiary-fixed-variant": "#004395",
+                      "surface-container-low": "#131b2e",
+                      "inverse-on-surface": "#283044",
+                      "surface-container-lowest": "#060e20",
+                      "tertiary-fixed-dim": "#adc6ff",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#3d4a3d",
+                      "on-surface-variant": "#bccbb9",
+                      "surface-variant": "#2d3449",
+                      "primary-container": "#22c55e",
+                      "primary": "#4be277",
+                      "tertiary-container": "#82abff",
+                      "tertiary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed": "#001a42",
+                      "surface-bright": "#31394d",
+                      "secondary-fixed": "#ffdad7",
+                      "on-surface": "#dae2fd",
+                      "secondary-fixed-dim": "#ffb3ad",
+                      "secondary-container": "#a40217",
+                      "on-primary-container": "#004b1e",
+                      "inverse-primary": "#006e2f",
+                      "on-tertiary-container": "#003d88",
+                      "surface-dim": "#0b1326",
+                      "error": "#ffb4ab",
+                      "on-background": "#dae2fd",
+                      "surface-container-high": "#222a3d",
+                      "inverse-surface": "#dae2fd",
+                      "on-error": "#690005",
+                      "on-primary": "#003915",
+                      "surface-container": "#171f33"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "32px",
+                      "container-padding": "24px",
+                      "stack-sm": "8px",
+                      "unit": "4px",
+                      "stack-md": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "mono-label": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "mono-data": [
+                              "JetBrains Mono"
+                      ],
+                      "display": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "mono-label": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "mono-data": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden" data-mode="connect">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed h-screen w-60 left-0 top-0 bg-surface-container border-r border-outline-variant py-stack-lg z-50">
+<div class="px-6 mb-8"><div class="flex flex-col gap-2"><div class="w-12 h-12 rounded-lg overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdE47PPgXW40UuhC8EJZTPfWOmV9khyQh6BUWNc2JJO1EiMnJxSwXJ-pf4EsoK4pomhr5EIWjpgw2_mmHrFu07ERp10oQFyQFtWrMb0VbybbOvn7EUiK4As1kVRuH0FrYWai4n8Fu1RsM61YWzqwYP9FxZ9oowV9uHjblSNyQ5BFassA6CsARvaUYnnxDboLP0GQtlgWqNu2o19AAmKhK4hgUmiomYCCH54NuCX1wjPxYG8DzaWSmY3D2aS1AqjCiCKjFzemNKLuKi" alt="Journalix Logo" class="w-full h-full object-cover"></div><div class="flex flex-col"><h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Journalix</h1><span class="text-body-sm font-body-sm text-on-surface-variant font-normal">Trading Community</span></div></div></div>
+<ul class="flex-1 px-4 space-y-2">
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-bright transition-colors duration-150 scale-100 active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-bright transition-colors duration-150 scale-100 active:scale-95" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-body-md font-body-md">Journal</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-bright transition-colors duration-150 scale-100 active:scale-95" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-body-md font-body-md">Community</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-2 border-primary bg-surface-container-high transition-colors duration-150 scale-100 active:scale-95" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-body-md font-body-md">Profile</span>
+</a>
+</li>
+</ul>
+<div class="px-6 mt-auto">
+<button class="w-full bg-on-surface text-surface py-2 rounded-lg text-body-sm font-body-sm font-bold hover:bg-surface-bright hover:text-on-surface border border-transparent hover:border-outline-variant transition-colors">
+                New Trade
+            </button>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="hidden md:flex justify-between items-center h-16 px-6 ml-60 w-[calc(100%-240px)] fixed top-0 z-40 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<!-- Search placeholder if needed -->
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-on-surface transition-opacity opacity-100 active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:text-on-surface transition-opacity opacity-100 active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:text-on-surface transition-opacity opacity-100 active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a modern quantitative trader in a sleek, dimly lit office environment. Soft blue and green monitor glow subtly illuminates their face. They are wearing a dark minimalist turtleneck. The lighting is dramatic and moody, fitting a high-tech financial aesthetic. 8k resolution, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZTFdd-rzI2DqIk27zJPFWtlHT9Vw_njdctqsUbUnnMC_9TneI2JU9fOuH4UP-gHmph46tSbZ3GcsWOVB1mO32Bal2C0_o0iVBOCTGl5zxIlxTYxtZm18IB_OrQ7amCeq5DKkjw6UpoVe6frlVAlLbEOZt2aGKFNSY1GuSTLbdjlSUGZrffjcV5iADGrTupwec9J4hqlB_7HXvxKI7w_fi033XmDSDE-0WCQth5WtmUmY24b_qvVJ7f53AQW6NKEanWQJMIu4CRsu2">
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 md:ml-60 pt-16 md:pt-20 px-4 md:px-container-padding pb-stack-lg overflow-y-auto">
+<div class="max-w-6xl mx-auto space-y-stack-md">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-surface-container-low p-container-padding rounded-xl border border-outline-variant relative overflow-hidden">
+<!-- Subtle background glow -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center gap-6 z-10">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a modern quantitative trader in a sleek, dimly lit office environment. Soft blue and green monitor glow subtly illuminates their face. They are wearing a dark minimalist turtleneck. The lighting is dramatic and moody, fitting a high-tech financial aesthetic. 8k resolution, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3U1Rg4gsZVnCkFWoCOt8ZXua-gYhxJTES3ogQ1V_GK_lVehp8PiRlX7BpX9Vowv-FeYWDz5IoJKGUzkrkcJ7apIDw8lRwAYpXmRkVq3LBkcH0UNoaXUtMk15d1iTHYi9D8eO4W2Z8j3g21d1cFbVr3PsxgIeeybgifVhNp1NJSB00IqbaNjpHpgjgJc1IaSQHSh28YbvGjPRfdRfVYoeSglUARReYgzEGIS1iw3OhZzhftP9xu66J-3cIcUjKNxqW3ogSNuY4VNba">
+</div>
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface flex items-center gap-3">
+                            Alex Mercer
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-mono-label font-mono-label bg-primary-container/10 text-primary border border-primary-container/20">
+                                PRO TIER
+                            </span>
+</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">@quant_alex</p>
+</div>
+</div>
+<div class="z-10 flex gap-3">
+<button class="px-4 py-2 bg-transparent border border-outline-variant text-on-surface rounded-lg text-body-sm font-body-sm hover:bg-surface-bright transition-colors">
+                        Edit Profile
+                    </button>
+<button class="px-4 py-2 bg-on-surface text-surface rounded-lg text-body-sm font-body-sm font-bold hover:bg-surface-bright hover:text-on-surface border border-transparent hover:border-outline-variant transition-colors">
+                        Share Profile
+                    </button>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-stack-md">
+<!-- Left Column (Stats & Milestones) -->
+<div class="lg:col-span-2 space-y-stack-md">
+<!-- Trading Statistics (Bento style) -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="col-span-2 md:col-span-2 bg-surface-container-low p-6 rounded-xl border border-outline-variant">
+<h3 class="text-body-sm font-body-sm text-on-surface-variant uppercase tracking-wider mb-2">Total PnL</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-display font-display text-primary">+$124,500.00</span>
+</div>
+<div class="mt-4 h-16 opacity-50">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path class="text-primary" d="M0 100 L 20 80 L 40 90 L 60 40 L 80 50 L 100 10" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path class="text-primary/10" d="M0 100 L 20 80 L 40 90 L 60 40 L 80 50 L 100 10 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant flex flex-col justify-between">
+<h3 class="text-body-sm font-body-sm text-on-surface-variant uppercase tracking-wider">Win Rate</h3>
+<span class="text-headline-lg font-headline-lg text-on-surface">64.2%</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant flex flex-col justify-between">
+<h3 class="text-body-sm font-body-sm text-on-surface-variant uppercase tracking-wider">Profit Factor</h3>
+<span class="text-headline-lg font-headline-lg text-on-surface">2.1</span>
+</div>
+<div class="col-span-2 bg-surface-container-low p-6 rounded-xl border border-outline-variant flex justify-between items-center">
+<div>
+<h3 class="text-body-sm font-body-sm text-on-surface-variant uppercase tracking-wider mb-1">Total Trades</h3>
+<span class="text-headline-md font-headline-md text-on-surface">1,240</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-4xl">candlestick_chart</span>
+</div>
+</section>
+<!-- Recent Achievements -->
+<section class="bg-surface-container-low p-container-padding rounded-xl border border-outline-variant">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-6 border-b border-outline-variant pb-4">Milestones</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center border border-primary-container/20">
+<span class="material-symbols-outlined text-primary">local_fire_department</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md text-on-surface font-semibold">10-Day Green Streak</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Achieved consecutive profitable days.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center border border-tertiary-container/20">
+<span class="material-symbols-outlined text-tertiary">monetization_on</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md text-on-surface font-semibold">First $10k Month</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Cleared $10,000 in realized net profit.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Settings) -->
+<div class="space-y-stack-md">
+<!-- Account Information -->
+<section class="bg-surface-container-low p-container-padding rounded-xl border border-outline-variant">
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold mb-6">Account Information</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-mono-label font-mono-label text-on-surface-variant mb-1">Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-3 py-2 text-body-md font-body-md text-on-surface focus:border-outline focus:ring-0" readonly="" type="text" value="Alex Mercer">
+</div>
+<div>
+<label class="block text-mono-label font-mono-label text-on-surface-variant mb-1">Email</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-3 py-2 text-body-md font-body-md text-on-surface focus:border-outline focus:ring-0" readonly="" type="email" value="alex.m@example.com">
+</div>
+<div>
+<label class="block text-mono-label font-mono-label text-on-surface-variant mb-1">Password</label>
+<div class="flex gap-2">
+<input class="w-full bg-surface border border-outline-variant rounded-md px-3 py-2 text-body-md font-body-md text-on-surface focus:border-outline focus:ring-0" readonly="" type="password" value="••••••••">
+<button class="px-3 py-2 border border-outline-variant rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Preferences -->
+<section class="bg-surface-container-low p-container-padding rounded-xl border border-outline-variant">
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold mb-6">Preferences</h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="text-body-md font-body-md text-on-surface">Dark Mode</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">System default theme</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-bright rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="text-body-md font-body-md text-on-surface">Notifications</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Trade alerts and updates</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-bright rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="text-body-md font-body-md text-on-surface">Public Profile</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Visible to community</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-bright rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+
+
+
+
+
+
+</body></html>

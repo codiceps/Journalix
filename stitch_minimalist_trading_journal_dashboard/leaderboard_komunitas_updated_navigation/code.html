@@ -1,0 +1,352 @@
+<!DOCTYPE html><html class="dark" lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Community Leaderboard - Journalix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#131b2e",
+                        "on-primary-fixed-variant": "#005321",
+                        "tertiary": "#afc7ff",
+                        "inverse-primary": "#006e2f",
+                        "on-tertiary": "#002e6a",
+                        "on-surface-variant": "#bccbb9",
+                        "primary-fixed-dim": "#4ae176",
+                        "surface-tint": "#4ae176",
+                        "surface-dim": "#0b1326",
+                        "on-primary": "#003915",
+                        "on-secondary-fixed": "#410004",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "surface-variant": "#2d3449",
+                        "background": "#0b1326",
+                        "tertiary-fixed": "#d8e2ff",
+                        "primary-fixed": "#6bff8f",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "surface": "#0b1326",
+                        "on-secondary-container": "#ffaea8",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#283044",
+                        "primary": "#4be277",
+                        "on-primary-container": "#004b1e",
+                        "on-tertiary-fixed": "#001a42",
+                        "surface-container-high": "#222a3d",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#ffdad7",
+                        "on-primary-fixed": "#002109",
+                        "inverse-surface": "#dae2fd",
+                        "secondary": "#ffb3ad",
+                        "surface-bright": "#31394d",
+                        "on-secondary": "#68000a",
+                        "primary-container": "#22c55e",
+                        "surface-container-lowest": "#060e20",
+                        "secondary-container": "#a40217",
+                        "outline": "#869585",
+                        "outline-variant": "#3d4a3d",
+                        "tertiary-container": "#82abff",
+                        "on-tertiary-container": "#003d88",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#930013",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface": "#dae2fd",
+                        "surface-container": "#171f33",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed-dim": "#adc6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "mono-data": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "mono-label": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "mono-data": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mono-label": ["13px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary selection:text-on-primary min-h-screen flex" data-mode="connect">
+<!-- SideNavBar -->
+<nav class="bg-surface-container dark:bg-surface-container fixed h-screen w-60 left-0 top-0 border-r border-outline-variant dark:border-outline-variant hidden md:flex flex-col z-50">
+<div class="flex flex-col h-full py-stack-lg">
+<!-- Brand -->
+<div class="px-container-padding mb-stack-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdE47PPgXW40UuhC8EJZTPfWOmV9khyQh6BUWNc2JJO1EiMnJxSwXJ-pf4EsoK4pomhr5EIWjpgw2_mmHrFu07ERp10oQFyQFtWrMb0VbybbOvn7EUiK4As1kVRuH0FrYWai4n8Fu1RsM61YWzqwYP9FxZ9oowV9uHjblSNyQ5BFassA6CsARvaUYnnxDboLP0GQtlgWqNu2o19AAmKhK4hgUmiomYCCH54NuCX1wjPxYG8DzaWSmY3D2aS1AqjCiCKjFzemNKLuKi" alt="Journalix Logo" class="w-full h-full object-cover rounded"></div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface dark:text-on-surface tracking-tight">Journalix</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Trading Community</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 px-3 space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-bright dark:hover:bg-surface-bright transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<!-- Calendar -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-bright dark:hover:bg-surface-bright transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">calendar_month</span>
+<span class="text-body-md font-body-md">Calendar</span>
+</a>
+<!-- Journal -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-bright dark:hover:bg-surface-bright transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">auto_stories</span>
+<span class="text-body-md font-body-md">Journal</span>
+</a>
+<!-- Community (Active) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high dark:bg-surface-container-high scale-100 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-body-md font-body-md">Community</span>
+</a>
+<!-- Profile -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-bright dark:hover:bg-surface-bright transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">person</span>
+<span class="text-body-md font-body-md">Profile</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="px-container-padding mt-auto pt-stack-lg">
+<button class="w-full bg-primary text-on-primary font-body-md font-bold py-3 px-4 rounded hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                    New Trade
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-60 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface docked full-width top-0 z-40 border-b border-outline-variant dark:border-outline-variant sticky flex justify-between items-center h-16 px-6">
+<!-- Mobile Brand / Search -->
+<div class="flex items-center gap-4 flex-1">
+<button class="md:hidden text-on-surface-variant p-2 -ml-2 rounded-full hover:bg-surface-bright">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-64 hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-md py-1.5 pl-9 pr-3 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors placeholder:text-on-surface-variant/50" placeholder="Search community..." type="text">
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-opacity opacity-100 active:opacity-80 rounded-full hover:bg-surface-bright">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-opacity opacity-100 active:opacity-80 rounded-full hover:bg-surface-bright">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-opacity opacity-100 active:opacity-80 rounded-full hover:bg-surface-bright">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden ml-2 cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark metallic trading desk surface with subtle blue LED accent lighting reflecting off brushed aluminum trim. The lighting creates a high-contrast, modern cyberpunk aesthetic typical of a high-end quantitative analysis workstation. Focus is sharp on the texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIo7jR_amFjQkCF6S29tMVjT588P4vpUM7twlxrOizKZhBWmYS-JONo281_Sl5zSwiC31G_0LAv0VlvTOjeXihh7uwSo03X7-DXcXnqUk2AoRQoQQ2y0QSNwc_8HJ3nARngbgr9t_6hkRxNie79J5m9X7UC24P0W8SEGaQlO8lSLyobGZy1exyLkAGD0z0T4zIqZQniG7AgVd5IfsdwLrYAYuNOa8SpqtQ7tbwyGsFB6Bn49GDpIU1ZvUn8pmcKg5nmRcLxb5Riwl6">
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-container-padding lg:p-8 overflow-y-auto">
+<!-- Page Header -->
+<div class="mb-stack-lg">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="text-body-sm font-body-sm uppercase tracking-wider">Community</span>
+</div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Trader Leaderboard</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2 max-w-2xl">
+                    Ranking based on our proprietary Consistency Score, rewarding steady risk management over volatile singular gains.
+                </p>
+</div>
+<!-- Metrics Row (Bento-style overview) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+<div class="bg-surface-container border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-1">Top Consistency</p>
+<p class="text-display font-display text-primary">94.2<span class="text-headline-md">%</span></p>
+<div class="flex items-center gap-2 mt-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full" data-alt="A minimalist digital avatar representing a professional trader, featuring clean geometric lines and a dark slate background. The avatar exudes calm and precision, rendered in vector art style with subtle green accents indicating positive performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgo4f7PxsOsimFdiu8vxtCyJyP6vl7TQoqXY0Md0AR9JriGw0GIBP4NjERiQAxSeXSbPlEQz8us5UC4n8p9LegqM30iLdTri4fmprJMKgsBxPfwL35hne0_iWPjCW6GLhYSOp7Qswy9DnnlKGqjNI6zXjtI_0Tz0XXUQkXqWPRp27VHmGv5tBv5ExFaieoS0rc8gs0Mb2a_2UPMzO20DtaX71DRySsrukAWOqVbVdhHXEu3QAxVX3hUh5x9vPvnMdS5SZmYi9FpHxS">
+<span class="text-body-sm font-body-sm">Alex M.</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/10 rounded-full blur-2xl group-hover:bg-tertiary/20 transition-all"></div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-1">Avg Profit Factor (Top 10)</p>
+<p class="text-display font-display text-on-surface">2.4<span class="text-headline-md font-mono-data">x</span></p>
+<div class="flex items-center gap-1 mt-2 text-primary">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-body-sm font-body-sm">+0.2 this week</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-xl p-6 relative overflow-hidden flex flex-col justify-center">
+<div class="flex justify-between items-center mb-4">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Your Rank</span>
+<span class="px-2 py-1 bg-surface-container-high rounded text-mono-label font-mono-label border border-outline-variant">#42</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mb-2">
+<div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-right">Top 15%</p>
+</div>
+</div>
+<!-- Leaderboard Table -->
+<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<!-- Table Controls -->
+<div class="p-4 border-b border-outline-variant bg-surface-container-high flex justify-between items-center">
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded text-body-sm font-body-sm font-medium hover:bg-primary/20 transition-colors">Global</button>
+<button class="px-3 py-1.5 bg-transparent text-on-surface-variant border border-outline-variant rounded text-body-sm font-body-sm hover:text-on-surface transition-colors">Following</button>
+</div>
+<button class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Filter
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/50 border-b border-outline-variant">
+<th class="py-3 px-4 text-mono-label font-mono-label text-on-surface-variant uppercase tracking-wider w-16 text-center">Rank</th>
+<th class="py-3 px-4 text-mono-label font-mono-label text-on-surface-variant uppercase tracking-wider">Trader</th>
+<th class="py-3 px-4 text-mono-label font-mono-label text-primary uppercase tracking-wider group cursor-pointer">
+<div class="flex items-center gap-1">
+                                        Consistency Score
+                                        <span class="material-symbols-outlined text-xs">arrow_downward</span>
+</div>
+</th>
+<th class="py-3 px-4 text-mono-label font-mono-label text-on-surface-variant uppercase tracking-wider text-right">Win Rate</th>
+<th class="py-3 px-4 text-mono-label font-mono-label text-on-surface-variant uppercase tracking-wider text-right">Profit Factor</th>
+<th class="py-3 px-4 text-mono-label font-mono-label text-on-surface-variant uppercase tracking-wider text-right">Total P&amp;L</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors group">
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm border border-primary/30">1</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A close up shot of a digital dashboard displaying complex financial charts and candlestick patterns in deep green and dark grey tones. The screen glows softly in a dark room, emphasizing a high-tech data-driven environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1U4UReHaIiLJKRgDI4cjN-dIcps9-nND8qaoQULQ8HH3f8b6KmONNZJGhMpOMFnOLDRrCsCl06yNMfx2HneRJkHjQd_rJHAFt1Np9AUPDGG2Bqt_bDgPRHy_Qv2FRCZN0fozIZ-RFo81khSVyEMb0tj-b7PLQwjZojkKZHQrCruip6y7sqvfHo1WYEhFJKbpTTWeywplQhsW74MFmCgRqaapytzp2r-H3LGqpxt_Z5aOVeOV_UzXuPgzpW9oYSvpFyEVNxYrJaBPA">
+</div>
+<div>
+<p class="text-body-md font-body-md font-medium text-on-surface group-hover:text-primary transition-colors">Alex Mercer</p>
+<p class="text-mono-label font-mono-label text-on-surface-variant">@quant_alex</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<span class="text-mono-data font-mono-data text-primary">94.2</span>
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 94.2%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-on-surface">68.5%</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-on-surface">2.8</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-primary">+$45,210</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors group">
+<td class="py-4 px-4 text-center">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">2</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Abstract algorithmic artwork showing flowing data streams in muted cyan and deep slate blues. The lines are precise and mathematical, resembling high-frequency trading data visualized aesthetically against a dark void." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1cIQ6JmBiEAWxCN_kIqO1rdjTsWcg3HA02E9caDfg2xiG3Iht2Qpe1BWQs4LUOunzpiaBxxe3-HWc6HASQUh3Tq5-H34gIGoE86w41j3036hwc9fVn_mlCGxjfdPeDJBNeyL9tupCMMihXCuhDFAzSZsc-FaEYyDUStcy1A9lsyIKDBFx0lstpKGYYpqLHyuUyUPTHSUTGkfVssLYt__MFvUooXPPRJ0qwIIBVwMB4ggGTlBMNgcAGIrk1ajDDDq5rHlssvfIxkMn">
+</div>
+<div>
+<p class="text-body-md font-body-md font-medium text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</p>
+<p class="text-mono-label font-mono-label text-on-surface-variant">@sj_trades</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<span class="text-mono-data font-mono-data text-primary">91.8</span>
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/80 rounded-full" style="width: 91.8%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-on-surface">62.1%</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-on-surface">3.1</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-primary">+$82,400</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors group">
+<td class="py-4 px-4 text-center">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">3</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant flex items-center justify-center">
+<span class="text-body-md font-bold text-on-surface-variant">DV</span>
+</div>
+<div>
+<p class="text-body-md font-body-md font-medium text-on-surface group-hover:text-primary transition-colors">David Voltz</p>
+<p class="text-mono-label font-mono-label text-on-surface-variant">@macro_dave</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<span class="text-mono-data font-mono-data text-primary">88.5</span>
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/60 rounded-full" style="width: 88.5%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-on-surface">55.4%</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-on-surface">1.9</td>
+<td class="py-4 px-4 text-right text-mono-data font-mono-data text-primary">+$15,890</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+
+
+
+
+
+
+</body></html>

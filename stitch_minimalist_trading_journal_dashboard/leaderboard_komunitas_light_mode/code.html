@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Journalix Community Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .bento-card {
+            background-color: #ffffff;
+            border: 1px solid #E2E8F0;
+            padding: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:hover {
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-container": "#9dadc6",
+                        "primary-fixed-dim": "#4ae176",
+                        "surface-container-high": "#e6e8ea",
+                        "background": "#f7f9fb",
+                        "inverse-primary": "#4ae176",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#505f76",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "primary-container": "#22c55e",
+                        "secondary": "#565e74",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-container": "#004b1e",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#6d7b6c",
+                        "primary": "#006e2f",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#bccbb9",
+                        "on-surface-variant": "#3d4a3d",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-bright text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 flex flex-col fixed left-0 top-0 bg-surface-bright border-r border-outline-variant py-lg px-md z-50">
+<div class="mb-xl px-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary">Journalix</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Trading Pro</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-sm py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md text-body-md">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-body-md text-body-md">Journal</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 text-primary font-bold border-r-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Community</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-md text-body-md">Profile</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg">
+<button class="w-full bg-primary-container text-on-primary font-bold py-3 px-md rounded-xl flex items-center justify-center gap-2 active:scale-95 duration-100 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-label-md text-label-md">New Trade</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="flex justify-between items-center h-16 px-lg ml-64 w-[calc(100%-16rem)] sticky top-0 bg-surface-bright border-b border-outline-variant z-40">
+<div class="flex items-center flex-1 max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 font-body-sm text-body-sm focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search traders or strategies..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-low rounded-full p-2 text-on-surface-variant transition-opacity active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-container-low rounded-full p-2 text-on-surface-variant transition-opacity active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a financial trader in a clean, high-key studio setting. The person wears a modern, dark blazer against a soft-focus office background with hints of greenery. The image is bright and minimalist, adhering to the Journalix brand identity of professional trust and growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuEbj1X4R2wxvB5Nt8QVtblsT-PMVbcytHMzUnI84R10I-jKUTnDgnZvISO1QugIOKDA9N0l8iGTjAMtd-T1pMUdadufhmRlR58oP2D2MfWmxSzWM0QpoTOqP8iXl0Cstt2jeZlrQNnxdgTCNBDXmQFAtIZ5xqsntLsbNe1bBDvb9LYIFL_ejkdXiTOwR07M2V7qJcylXMZJByFNBYL9Jm1-6cNS9NIot17GTQxtxZxv2zC9Jf5t8BgrHVDJfVDxdbMa97YTbJkRZD"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-xl max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-xl">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Community Leaderboard</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant opacity-80">Benchmarks and top performers across the global trading ecosystem.</p>
+</div>
+<!-- Top Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<!-- Top Consistency -->
+<div class="bento-card rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary-container/10 text-primary p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+</span>
+<span class="font-label-sm text-label-sm text-primary">+2.4% vs last week</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Avg. Consistency</p>
+<h2 class="font-headline-lg text-headline-lg">78.4<span class="text-on-surface-variant font-normal">%</span></h2>
+</div>
+<div class="mt-4 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[78.4%]"></div>
+</div>
+</div>
+<!-- Profit Factor -->
+<div class="bento-card rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary-container/10 text-primary p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</span>
+<span class="font-label-sm text-label-sm text-primary">Stable</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Avg. Profit Factor</p>
+<h2 class="font-headline-lg text-headline-lg">1.82</h2>
+</div>
+<div class="flex items-center gap-1 mt-4">
+<div class="h-8 w-full bg-surface-container-low rounded flex items-end p-1 gap-1">
+<div class="bg-primary-container/20 w-1/6 h-1/2 rounded-sm"></div>
+<div class="bg-primary-container/40 w-1/6 h-2/3 rounded-sm"></div>
+<div class="bg-primary-container/60 w-1/6 h-3/4 rounded-sm"></div>
+<div class="bg-primary-container w-1/6 h-full rounded-sm"></div>
+<div class="bg-primary-container/80 w-1/6 h-4/5 rounded-sm"></div>
+<div class="bg-primary-container/40 w-1/6 h-1/2 rounded-sm"></div>
+</div>
+</div>
+</div>
+<!-- Your Rank -->
+<div class="bento-card rounded-xl bg-inverse-surface border-none text-surface-bright flex flex-col justify-between overflow-hidden relative">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="trophy">trophy</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary/20 text-primary-fixed-dim p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+</span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">Top 12%</span>
+</div>
+<p class="font-label-md text-label-md opacity-70 uppercase tracking-wider mb-1">Your Ranking</p>
+<h2 class="font-headline-lg text-headline-lg">#412 <span class="font-body-md text-body-md opacity-60 text-[16px]">/ 3.4k</span></h2>
+</div>
+<button class="relative z-10 mt-4 text-primary-fixed-dim font-label-md text-label-md flex items-center gap-1 hover:underline">
+                    View personal stats <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Leaderboard Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<!-- Tabs Navigation -->
+<div class="flex border-b border-outline-variant px-lg bg-surface-bright/50">
+<button class="px-lg py-4 border-b-2 border-primary text-primary font-bold font-label-md text-label-md">Global</button>
+<button class="px-lg py-4 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">Following</button>
+<button class="px-lg py-4 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">By Strategy</button>
+</div>
+<!-- Table Header -->
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-bright border-b border-outline-variant">
+<th class="px-lg py-4 text-left font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest w-20">Rank</th>
+<th class="px-lg py-4 text-left font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Trader</th>
+<th class="px-lg py-4 text-left font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Consistency Score</th>
+<th class="px-lg py-4 text-center font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Win Rate</th>
+<th class="px-lg py-4 text-center font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">P. Factor</th>
+<th class="px-lg py-4 text-right font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Total P&amp;L</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high">
+<!-- Top 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-5 font-headline-md text-headline-md text-primary">01</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a confident trader in their mid-30s. The aesthetic is clean and professional with neutral gray and emerald green tones in the background. The lighting is soft but defined, conveying expertise and stability. High resolution, minimalist financial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPEldxe4NLrDjNwqzMIrXmKrPu7Qp9pJiYQw3e2o9fcEHrJqQtJuvFzkbSFFCvSJnOQEbMeZ-vfjEHPjmZK7zx3OKxnAxeSyN3rsLlpJXaZpGRZELZrC4ZFvFMxXxo7e5Z_xpZebbriFob7bhpZNohd7F1WES7uIUZ3TlfucXpJ3x-xk_pC3x-iresPxbV605l-D_82YRp7JQzf__HzXgPKGu5YE6Xkl3KsNy6YFRfPl5mvm2FaJH68d17Abab48-0Ppg6K87PXUf3"/>
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-surface">Alex Rivero</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">@arivero_fx</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md w-10">96.2%</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden min-w-[120px]">
+<div class="h-full bg-primary-container w-[96.2%] rounded-full"></div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">68%</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">2.45</td>
+<td class="px-lg py-5 text-right font-label-md text-label-md text-primary font-bold">+$142,500.00</td>
+</tr>
+<!-- Top 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-5 font-headline-md text-headline-md text-on-surface-variant">02</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of an Asian female trader wearing minimalist tech-wear. The background is a blurred office with glass partitions and soft warm lighting. The overall mood is focused and serene, using a color palette of soft greys and vibrant greens. Professional financial advisor aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDIvFmvcoQtAlFKH5PbdVs2EcXIEtJ8inX6dEk_BTWxrfqQLQ6kVnHCcEYwDIl7tcQjNHfQz5ow6pcPoPii6NGpo1RTAf16bsaC4-7emFrkpFYf1fzfP1mxznJzxK7DgWS11o7AT11M1fvszeK7MrH48zEpvFTORQh4JAhROfT-gYkSZNqKYBQ0BrWGlH8d9ZE9xfy-OPjUAYDIG3Vd68nyb8RMxwkuT63zJ1ZDyu_3kYRf5_cXIqkHqEbqJNmJuHg4ovy0oMR_UhK"/>
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-surface">Hana Kim</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">@hana_trade</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md w-10">94.8%</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden min-w-[120px]">
+<div class="h-full bg-primary-container w-[94.8%] rounded-full"></div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">72%</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">2.18</td>
+<td class="px-lg py-5 text-right font-label-md text-label-md text-primary font-bold">+$98,320.15</td>
+</tr>
+<!-- Top 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-5 font-headline-md text-headline-md text-on-surface-variant">03</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young black man with a sharp, professional haircut. He is wearing a crisp white linen shirt in a modern bright office environment. The style is clean, airy, and high-key. Deep greens and soft whites dominate the scene, suggesting financial clarity and optimism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnYgpeok7WQ8ORtbeF7UHQqxVdPe1sgpsmXwPAJQ097Tb7ClHdrD1yIUN7_UPQBhbrTBKbHC5V7FMl5WnJ1mgLILOaTxMYvjCx1Fp74ni05xnYz2i6Zysv_hejZCAnozJpKj-wCmeXwvIhVhjKdUKqr46xUNJmmQqW3os412G0VVcFKDRhKefAFtTjrsFN4ykWTLZ_VNeTNZxZdYq5XRWlSoSGM3VPBqC3hUgGYosr9zpCm41gOx_uw23uYrPuP3rLJwo_IhDM1nx4"/>
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-surface">Jordan M.</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">@jordan_alpha</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md w-10">91.5%</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden min-w-[120px]">
+<div class="h-full bg-primary-container w-[91.5%] rounded-full"></div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">65%</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">1.95</td>
+<td class="px-lg py-5 text-right font-label-md text-label-md text-primary font-bold">+$81,400.00</td>
+</tr>
+<!-- Top 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-5 font-headline-md text-headline-md text-on-surface-variant">04</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a sophisticated European woman in her 40s in a professional corporate setting. She is looking thoughtfully at a tablet off-camera. The lighting is bright and natural. The background features minimalist modern architecture with soft greens and slates, conveying stability and strategic thinking." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiRasOd8-AAST-fbyMZqI9yHe02zf609l6PYs62ZF6TfsLsPa5i5fWKo0QYOu0rYcjOjFkWR36n9I5hBeFi9-JSLwQtHO0r8LImVtwRV_x8v8mlZfe2se24nSF72IA0XWz2KeKbVW7cSBHo_aGv08VsEWP5MsvL8cEyIw0iZRAmOK_e7YyfTxU9iBjOkbz2AG7h0Y0ast3XKvf55rh1worXM-wKjuZxSlbDihxDseOQlne3h8UoT1Wkn5qgZPKYARjQzLHDEuPpPGw"/>
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-surface">Elena Soros</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">@esoros_macro</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md w-10">88.2%</span>
+<div class="flex-1 h-2 bg-surface-container-high rounded-full overflow-hidden min-w-[120px]">
+<div class="h-full bg-primary-container w-[88.2%] rounded-full"></div>
+</div>
+</div>
+</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">59%</td>
+<td class="px-lg py-5 text-center font-label-md text-label-md">2.01</td>
+<td class="px-lg py-5 text-right font-label-md text-label-md text-primary font-bold">+$76,211.50</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Footer -->
+<div class="px-lg py-4 border-t border-outline-variant flex justify-between items-center bg-surface-bright/50">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1-10 of 3,421 traders</span>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-high font-label-sm text-label-sm">1</button>
+<button class="px-4 py-2 rounded-lg hover:bg-surface-container-low font-label-sm text-label-sm transition-colors">2</button>
+<button class="px-4 py-2 rounded-lg hover:bg-surface-container-low font-label-sm text-label-sm transition-colors">3</button>
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Secondary Section: Trending Strategies -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="bento-card rounded-xl">
+<h3 class="font-headline-md text-headline-md mb-md">Trending Discussions</h3>
+<div class="space-y-4">
+<div class="flex gap-4 p-md rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold">Mean Reversion on SPX500</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Analyzing the 200-day moving average crossovers in high volatility regimes...</p>
+<div class="mt-2 flex gap-4 text-on-surface-variant opacity-60">
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="mode_comment">mode_comment</span> 24
+                                </span>
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 142
+                                </span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 p-md rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex-shrink-0 w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold">Psychology of the "Drawdown"</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">How top 1% traders manage emotional fatigue during losing streaks...</p>
+<div class="mt-2 flex gap-4 text-on-surface-variant opacity-60">
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="mode_comment">mode_comment</span> 89
+                                </span>
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 567
+                                </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bento-card rounded-xl">
+<h3 class="font-headline-md text-headline-md mb-md">Quick Comparison</h3>
+<div class="space-y-4">
+<div class="p-lg bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-center mb-md">
+<span class="font-label-md text-label-md uppercase opacity-60">Profit Factor Matrix</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_horiz">more_horiz</span>
+</div>
+<div class="grid grid-cols-4 gap-2 h-24 items-end">
+<div class="bg-primary/20 rounded-t-sm h-[40%] flex flex-col justify-end items-center py-1">
+<span class="font-label-sm text-[10px] text-primary">1.2</span>
+</div>
+<div class="bg-primary/40 rounded-t-sm h-[65%] flex flex-col justify-end items-center py-1">
+<span class="font-label-sm text-[10px] text-primary">1.8</span>
+</div>
+<div class="bg-primary/80 rounded-t-sm h-[90%] flex flex-col justify-end items-center py-1">
+<span class="font-label-sm text-[10px] text-on-primary">2.4</span>
+</div>
+<div class="bg-primary/60 rounded-t-sm h-[75%] flex flex-col justify-end items-center py-1">
+<span class="font-label-sm text-[10px] text-on-primary">2.1</span>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-2 mt-2 text-center font-label-sm text-label-sm text-on-surface-variant">
+<span>You</span>
+<span>Avg</span>
+<span>Top 1%</span>
+<span>Target</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for the search bar
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+            searchInput.parentElement.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+
+        // Hover effect for table rows
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.querySelector('.font-headline-md').classList.add('scale-110');
+                row.querySelector('.font-headline-md').style.transition = 'transform 0.2s ease';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.querySelector('.font-headline-md').classList.remove('scale-110');
+            });
+        });
+    </script>
+</body></html>

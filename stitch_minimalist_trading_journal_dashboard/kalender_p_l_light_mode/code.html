@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trading Calendar | Journalix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-container": "#9dadc6",
+                        "primary-fixed-dim": "#4ae176",
+                        "surface-container-high": "#e6e8ea",
+                        "background": "#f7f9fb",
+                        "inverse-primary": "#4ae176",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#505f76",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-surface": "#191c1e",
+                        "on-secondary-container": "#5c647a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#6bff8f",
+                        "surface-variant": "#e0e3e5",
+                        "outline-variant": "#bccbb9",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-surface-variant": "#3d4a3d",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#22c55e",
+                        "secondary": "#565e74",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#dae2fd",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-primary-fixed-variant": "#005321",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "on-primary-container": "#004b1e",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#002109",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#6d7b6c",
+                        "primary": "#006e2f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#006e2f",
+                        "surface-container": "#eceef0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-xl": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f7f9fb;
+            font-family: 'Inter', sans-serif;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #E2E8F0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Side Navigation -->
+<aside class="h-screen w-64 flex flex-col fixed left-0 top-0 bg-surface-bright border-r border-outline-variant py-lg px-md z-50">
+<div class="mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Journalix</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Trading Pro</p>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-primary font-bold border-r-4 border-primary bg-surface-container-high transition-colors rounded-l-none rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-md text-label-md">Journal</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<button class="mt-auto bg-primary-container text-on-primary py-md rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Trade
+        </button>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-64 w-[calc(100%-16rem)] min-h-screen">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center h-16 px-lg sticky top-0 z-40 bg-surface-bright/80 backdrop-blur-md border-b border-outline-variant">
+<div class="flex items-center bg-surface-container-low px-md py-2 rounded-full w-96 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full outline-none" placeholder="Search trades, assets, or dates..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-outline-variant ml-2 border border-outline">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a financial trader in a clean, modern workspace, light mode aesthetic, sharp focus, professional attire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpLs7hcMWCWASj64o-xLPN0k2guKvfP_HAOTABBRMoz_cTFyvr3u4LzJdryLAJuQf-_jmZ3UWgHNJjlA_LZWZ-1jR0ZXeZa2IeTvMEkUhRf48Lm8iKbS-BQS9bXMNClq5iZ9ACr5d-T-xO4w9FFCVeLVuihYy6vpHps6Sqw2k4IktWG1_QOUdPJxcUl9uCKLenTXbd7cvq2AJLCt-FlovIWPw2CzBD7r4doxE8o4H8v0RALnBxNA6OdXqm8qMuFLgMn8wvawIg2tGF"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-xl space-y-lg">
+<!-- Header Controls -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Trading Calendar</h2>
+<p class="font-body-md text-on-surface-variant">Visualizing your performance and growth trajectory.</p>
+</div>
+<div class="flex gap-md">
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<button class="px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<span class="px-lg font-label-md text-label-md border-x border-outline-variant">October 2023</span>
+<button class="px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+<button class="flex items-center gap-2 px-lg py-sm bg-surface-container-lowest border border-outline-variant rounded-xl font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+<button class="flex items-center gap-2 px-lg py-sm bg-surface-container-lowest border border-outline-variant rounded-xl font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="file_download">file_download</span>
+                        Export Data
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Main Calendar View -->
+<div class="col-span-12 lg:col-span-9 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="calendar-grid bg-surface-container-low border-b border-outline-variant">
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Sun</div>
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Mon</div>
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Tue</div>
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Wed</div>
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Thu</div>
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Fri</div>
+<div class="py-sm text-center font-label-sm text-on-surface-variant uppercase tracking-wider">Sat</div>
+</div>
+<div class="calendar-grid">
+<!-- Calendar Days -->
+<!-- Row 1 -->
+<div class="h-32 border-r border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">24</span></div>
+<div class="h-32 border-r border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">25</span></div>
+<div class="h-32 border-r border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">26</span></div>
+<div class="h-32 border-r border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">27</span></div>
+<div class="h-32 border-r border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">28</span></div>
+<div class="h-32 border-r border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">29</span></div>
+<div class="h-32 border-b border-outline-variant p-2 bg-surface-container-lowest opacity-50"><span class="font-label-sm text-on-surface-variant">30</span></div>
+<!-- Row 2 (October Start) -->
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md">1</span>
+<span class="px-2 py-0.5 rounded text-[10px] bg-surface-container text-on-surface-variant">No Trades</span>
+</div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">2</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$1,420</span>
+<span class="text-[10px] text-on-surface-variant mt-1">4 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">3</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-error font-bold">-$450</span>
+<span class="text-[10px] text-on-surface-variant mt-1">2 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-error mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">4</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$2,100</span>
+<span class="text-[10px] text-on-surface-variant mt-1">3 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">5</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-error font-bold">-$820</span>
+<span class="text-[10px] text-on-surface-variant mt-1">6 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-error mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">6</span>
+</div>
+<div class="h-32 border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">7</span>
+</div>
+<!-- Row 3 -->
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">8</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$5,800</span>
+<span class="text-[10px] text-on-surface-variant mt-1">1 Trade</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">9</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$120</span>
+<span class="text-[10px] text-on-surface-variant mt-1">8 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">10</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-error font-bold">-$1,100</span>
+<span class="text-[10px] text-on-surface-variant mt-1">3 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-error mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">11</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$950</span>
+<span class="text-[10px] text-on-surface-variant mt-1">2 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">12</span>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">13</span>
+</div>
+<div class="h-32 border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">14</span>
+</div>
+<!-- Row 4 -->
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">15</span>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">16</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$2,840</span>
+<span class="text-[10px] text-on-surface-variant mt-1">5 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">17</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$3,210</span>
+<span class="text-[10px] text-on-surface-variant mt-1">4 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">18</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-error font-bold">-$2,100</span>
+<span class="text-[10px] text-on-surface-variant mt-1">11 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-error mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">19</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$1,500</span>
+<span class="text-[10px] text-on-surface-variant mt-1">2 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-r border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors relative">
+<span class="font-label-md text-label-md">20</span>
+<div class="mt-4 flex flex-col items-center">
+<span class="font-label-md text-primary font-bold">+$800</span>
+<span class="text-[10px] text-on-surface-variant mt-1">3 Trades</span>
+</div>
+<div class="absolute bottom-2 left-0 right-0 h-1 bg-primary mx-3 rounded-full"></div>
+</div>
+<div class="h-32 border-b border-outline-variant p-3 group hover:bg-surface-container transition-colors">
+<span class="font-label-md text-label-md">21</span>
+</div>
+</div>
+</div>
+<!-- Sidebar Summary -->
+<div class="col-span-12 lg:col-span-3 space-y-lg">
+<!-- Month Summary Card -->
+<div class="glass-card p-lg rounded-xl shadow-sm">
+<h3 class="font-headline-md text-headline-md mb-md text-on-surface">Month Summary</h3>
+<div class="space-y-md">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant text-body-md">Net PnL</span>
+<span class="font-label-md text-primary text-headline-md font-bold">+$16,340</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4 rounded-full"></div>
+</div>
+<div class="grid grid-cols-2 gap-md pt-md">
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">Trades</p>
+<p class="font-label-md text-on-surface">142</p>
+</div>
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">Avg. RR</p>
+<p class="font-label-md text-on-surface">1:2.4</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Performance Stats Cards -->
+<div class="space-y-md">
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+</div>
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">Win Rate</p>
+<p class="font-headline-md text-headline-md text-on-surface">68.4%</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+</div>
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">Best Day</p>
+<p class="font-headline-md text-headline-md text-on-surface">+$5,800</p>
+<p class="text-[10px] text-on-surface-variant">Oct 08, 2023</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">Profit Factor</p>
+<p class="font-headline-md text-headline-md text-on-surface">2.18</p>
+</div>
+</div>
+</div>
+<!-- Market Insights -->
+<div class="bg-inverse-surface text-inverse-on-surface p-lg rounded-xl overflow-hidden relative group">
+<div class="absolute inset-0 opacity-10 bg-gradient-to-br from-primary-fixed to-transparent"></div>
+<h4 class="font-label-md text-label-md mb-2 relative z-10">AI Insights</h4>
+<p class="text-body-sm relative z-10 opacity-90 italic">"You tend to overtrade on Tuesdays after a morning loss. Your win rate is 22% higher when sticking to NY open setups."</p>
+<button class="mt-4 text-[10px] font-bold uppercase underline relative z-10 hover:text-primary-fixed transition-colors">View Details</button>
+</div>
+</div>
+</div>
+<!-- Trade History Section (Quick View) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Activity</h3>
+<a class="text-primary font-label-md hover:underline" href="#">View All Journal Entries</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-tighter">Asset</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-tighter">Type</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-tighter">Entry</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-tighter">Exit</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-tighter">PnL</th>
+<th class="px-lg py-md font-label-sm text-on-surface-variant uppercase tracking-tighter">Outcome</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-label-md">EUR/USD</td>
+<td class="px-lg py-md"><span class="px-2 py-1 rounded-full bg-primary-fixed-dim/20 text-primary font-bold text-[10px] uppercase">Long</span></td>
+<td class="px-lg py-md font-label-sm text-on-surface-variant">1.0542</td>
+<td class="px-lg py-md font-label-sm text-on-surface-variant">1.0620</td>
+<td class="px-lg py-md font-label-md text-primary font-bold">+$820.00</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-body-sm">Take Profit</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-label-md">NASDAQ 100</td>
+<td class="px-lg py-md"><span class="px-2 py-1 rounded-full bg-error-container text-error font-bold text-[10px] uppercase">Short</span></td>
+<td class="px-lg py-md font-label-sm text-on-surface-variant">15420.50</td>
+<td class="px-lg py-md font-label-sm text-on-surface-variant">15455.00</td>
+<td class="px-lg py-md font-label-md text-error font-bold">-$345.00</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-body-sm">Stop Loss</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<script>
+        // Micro-interaction for calendar cells
+        document.querySelectorAll('.calendar-grid > div').forEach(cell => {
+            cell.addEventListener('mouseenter', () => {
+                if (cell.classList.contains('group')) {
+                    cell.style.transform = 'translateY(-2px)';
+                    cell.style.zIndex = '10';
+                }
+            });
+            cell.addEventListener('mouseleave', () => {
+                cell.style.transform = 'translateY(0px)';
+                cell.style.zIndex = '1';
+            });
+        });
+    </script>
+</body></html>
